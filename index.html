@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="kk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartFarm AI — егістікті оңтайлы жоспарлау</title>
+    <meta
+      name="description"
+      content="Климат, су, жер және бюджетке сүйене отырып, егістікті AI көмегімен оңтайлы жоспарлау платформасы. Сызықтық программалау, симплекс әдісі және 3D визуализация."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-climate="normal">
+    <div class="bg-blobs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <header class="nav glass">
+      <a href="#home" class="logo">
+        <img src="/favicon.svg" alt="" width="30" height="30" />
+        <span>SmartFarm <b>AI</b></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#resources">Ресурстар</a>
+        <a href="#crops">Дақылдар</a>
+        <a href="#climate">Климат</a>
+        <a href="#model">Модель</a>
+        <a href="#results">Нәтиже</a>
+        <a href="#ai">AI кеңес</a>
+        <a href="#compare">Салыстыру</a>
+      </nav>
+      <button class="btn btn-primary btn-sm" data-action="optimize">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg>
+        Оптимизациялау
+      </button>
+    </header>
+
+    <main>
+      <!-- 1. HERO -->
+      <section id="home" class="hero">
+        <div class="hero-text">
+          <span class="pill"><i class="dot"></i> AI + сызықтық программалау + 3D</span>
+          <h1>SmartFarm <span class="grad">AI</span></h1>
+          <p class="lead">
+            Климат, су, жер және бюджетке сүйене отырып, егістікті AI көмегімен оңтайлы жоспарлау платформасы
+          </p>
+          <div class="hero-actions">
+            <a href="#resources" class="btn btn-primary btn-lg">Есептеуді бастау</a>
+            <button class="btn btn-ghost btn-lg" id="btnDemo">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
+              Демо қолдану
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div><b>4</b><span>дақыл</span></div>
+            <div><b>3</b><span>климат сценарийі</span></div>
+            <div><b>LP</b><span>симплекс әдісі</span></div>
+            <div><b>3D</b><span>ферма картасы</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="scene-box" id="heroScene"></div>
+          <div class="float-chip glass chip-a">
+            <span class="ico ico-blue">💧</span>
+            <div><small>Су қоры</small><b id="chipWater">5 000 м³</b></div>
+          </div>
+          <div class="float-chip glass chip-b">
+            <span class="ico ico-green">📈</span>
+            <div><small>Максималды пайда</small><b id="chipProfit">—</b></div>
+          </div>
+          <div class="float-chip glass chip-c">
+            <span class="ico ico-yellow">☀️</span>
+            <div><small>Климат</small><b id="chipClimate">Қалыпты жыл</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. РЕСУРСТАР -->
+      <section id="resources" class="section">
+        <div class="section-head">
+          <span class="eyebrow">01 · Ресурстар</span>
+          <h2>Ферманың ресурстарын енгізіңіз</h2>
+          <p>Жер, су және бюджет — математикалық модельдің шектеулерін құрайды.</p>
+        </div>
+        <div class="grid-2-1">
+          <div class="card glass" id="rangeCard"></div>
+          <div class="card glass profile">
+            <h3>Аймақ және ресурс профилі</h3>
+            <label class="field">
+              <span>Аймақ</span>
+              <select id="regionSelect"></select>
+            </label>
+            <div class="profile-grid" id="profile"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ДАҚЫЛДАР -->
+      <section id="crops" class="section">
+        <div class="section-head">
+          <span class="eyebrow">02 · Дақылдар</span>
+          <h2>Дақыл параметрлері</h2>
+          <p>Мәндерді өзгертуге болады — таза пайда климат пен аймақ коэффициенттерімен автоматты қайта есептеледі.</p>
+        </div>
+        <div class="crop-grid" id="cropGrid"></div>
+      </section>
+
+      <!-- 4. КЛИМАТ -->
+      <section id="climate" class="section">
+        <div class="section-head">
+          <span class="eyebrow">03 · Климат және AI болжам</span>
+          <h2>Климаттық сценарийді таңдаңыз</h2>
+          <p>Сценарий су қорына, су қажеттілігіне және өнімділікке әсер етеді. 3D сахна да өзгереді.</p>
+        </div>
+        <div class="climate-layout">
+          <div class="climate-left">
+            <div class="climate-options" id="climateOptions"></div>
+            <div class="card glass forecast" id="forecast"></div>
+          </div>
+          <div class="card glass scene-card">
+            <div class="scene-box" id="climateScene"></div>
+            <div class="scene-badge glass" id="climateBadge"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. МОДЕЛЬ -->
+      <section id="model" class="section">
+        <div class="section-head">
+          <span class="eyebrow">04 · Математикалық модель</span>
+          <h2>Сызықтық программалау есебі</h2>
+          <p>Модель енгізілген деректерден автоматты құрылады және симплекс әдісімен шешіледі.</p>
+        </div>
+        <div class="grid-1-1">
+          <div class="card glass math" id="modelMath"></div>
+          <div class="card glass">
+            <div class="optimize-box">
+              <div>
+                <h3>Симплекс әдісі</h3>
+                <p class="muted">Кестелік симплекс, Данциг ережесі, минималды қатынас тесті.</p>
+              </div>
+              <span class="stale" id="staleBadge" hidden>Параметрлер өзгерді</span>
+            </div>
+            <button class="btn btn-primary btn-xl" data-action="optimize">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg>
+              Оптимизациялау
+            </button>
+            <div class="simplex-log" id="simplexLog"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. НӘТИЖЕ -->
+      <section id="results" class="section">
+        <div class="section-head">
+          <span class="eyebrow">05 · Оптимизация нәтижесі</span>
+          <h2>Оңтайлы егіс құрылымы</h2>
+          <p id="resultCaption">Телімге курсорды апарыңыз — толық ақпарат шығады. Картаны тышқанмен айналдыруға болады.</p>
+        </div>
+        <div class="kpis" id="kpis"></div>
+        <div class="result-layout">
+          <div class="card glass map-card">
+            <div class="scene-box" id="resultScene"></div>
+            <div class="scene-badge glass" id="mapBadge"></div>
+            <div class="tooltip glass" id="tooltip" hidden></div>
+          </div>
+          <div class="result-side">
+            <div class="card glass">
+              <h3>Гектар бойынша бөлу</h3>
+              <div class="alloc-list" id="allocList"></div>
+            </div>
+            <div class="card glass">
+              <h3>Ресурстардың қолданылуы</h3>
+              <div class="usage" id="usageBars"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. ГРАФИКТЕР -->
+      <section id="analytics" class="section">
+        <div class="section-head">
+          <span class="eyebrow">06 · Аналитика</span>
+          <h2>Графиктер мен диаграммалар</h2>
+        </div>
+        <div class="grid-1-2">
+          <div class="card glass chart-card">
+            <h3>Жер үлесі</h3>
+            <div class="chart-wrap"><canvas id="pieChart"></canvas></div>
+          </div>
+          <div class="card glass chart-card">
+            <h3>Пайда, шығын және су жұмсауы</h3>
+            <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. AI -->
+      <section id="ai" class="section">
+        <div class="section-head">
+          <span class="eyebrow">07 · AI ұсынысы</span>
+          <h2>SmartFarm AI қорытындысы</h2>
+        </div>
+        <div class="card glass ai-card">
+          <div class="ai-head">
+            <div class="ai-avatar">
+              <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.07A8 8 0 0 1 20 12v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-5a8 8 0 0 1 7-7.93V3a1 1 0 0 1 1-1Zm-3 9.5A1.5 1.5 0 1 0 9 14.5a1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" /></svg>
+            </div>
+            <div>
+              <b>SmartFarm AI</b>
+              <small id="aiMeta">агро-аналитика моделі</small>
+            </div>
+            <span class="confidence" id="aiConfidence"></span>
+          </div>
+          <div class="ai-summary" id="aiSummary"></div>
+          <div class="ai-chips" id="aiChips"></div>
+          <div class="ai-thread" id="aiThread"></div>
+        </div>
+      </section>
+
+      <!-- 9. САЛЫСТЫРУ -->
+      <section id="compare" class="section">
+        <div class="section-head">
+          <span class="eyebrow">08 · Сценарийлерді салыстыру</span>
+          <h2>Құрғақ · Қалыпты · Жаңбырлы</h2>
+          <p>Бірдей ресурстармен үш климаттық сценарий бойынша оңтайлы шешімдер.</p>
+        </div>
+        <div class="compare-cards" id="compareCards"></div>
+        <div class="grid-1-1">
+          <div class="card glass"><div class="table-wrap" id="compareTable"></div></div>
+          <div class="card glass chart-card">
+            <h3>Дақылдар үлесі (га)</h3>
+            <div class="chart-wrap"><canvas id="compareChart"></canvas></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <b>SmartFarm AI</b> · Математикалық модельдеу · Сызықтық программалау · Симплекс әдісі
+      </div>
+      <div class="muted">© 2026 SmartFarm AI</div>
+    </footer>
+
+    <div class="loader" id="loader" hidden>
+      <div class="loader-card glass">
+        <div class="loader-ring"><span></span></div>
+        <h3>AI есептеп жатыр…</h3>
+        <ul id="loaderSteps"></ul>
+        <div class="loader-bar"><i id="loaderBar"></i></div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
